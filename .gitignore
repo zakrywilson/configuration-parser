@@ -82,6 +82,3 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-.gitignore
-pom.xml
-src/
