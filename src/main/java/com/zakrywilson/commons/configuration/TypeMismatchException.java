@@ -49,7 +49,7 @@ public final class TypeMismatchException extends Exception {
      * runtime exception's detail message.
      *
      * @param msg the detail message (which is saved for later retrieval by the
-     *            {@link Throwable#getMessage()} method).
+     *            {@link Throwable#getMessage()} method)
      * @param cause the cause (which is saved for later retrieval by the
      *              {@link Throwable#getCause()} method). (A <tt>null</tt> value is permitted, and
      *              indicates that the cause is nonexistent or unknown.)
