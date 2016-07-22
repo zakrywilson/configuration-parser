@@ -1,13 +1,13 @@
 package com.aisolutions.program_i.configurationparser;
 
-import org.apache.commons.io.FileUtils;
-
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Set;
+import java.nio.file.Files;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ConfigFileParser {
 
@@ -31,12 +31,15 @@ public class ConfigFileParser {
         }
     }
 
-    public Set parseConfigFile() throws IOException {
-        List<String> lines = FileUtils.readLines(file, StandardCharsets.US_ASCII);
-        for (String line : lines) {
-            // TODO implement
+    public Map<String, String> parseConfigFile() throws IOException, InvalidConfigurationException {
+        Map<String, String> elements = new HashMap<>();
+        try (BufferedReader reader = Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8)) {
+            Line line = new Line(reader.readLine());
+            if (line.containsData()) {
+                elements.put(line.getName(), line.getElement());
+            }
         }
-        return null;
+        return elements;
     }
 
 }

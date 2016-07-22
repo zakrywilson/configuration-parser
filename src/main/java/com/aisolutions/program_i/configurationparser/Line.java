@@ -2,39 +2,41 @@ package com.aisolutions.program_i.configurationparser;
 
 public class Line {
 
-    private LineType type;
+    private boolean containsData;
 
     private String name;
 
-    private String data;
+    private String element;
 
-    public Line() {}
-
-    public LineType getLineType() {
-        return type;
-    }
-
-    public Line setLineType(final LineType type) {
-        this.type = type;
-        return this;
+    public Line(final String line) throws InvalidConfigurationException {
+        initialize(line);
     }
 
     public String getName() {
         return name;
     }
 
-    public Line setName(final String name) {
-        this.name = name;
-        return this;
+    public String getElement() {
+        return element;
     }
 
-    public String getData() {
-        return data;
+    public boolean containsData() {
+        return containsData;
     }
 
-    public Line setData(final String data) {
-        this.data = data;
-        return this;
+    private void initialize(final String line) throws InvalidConfigurationException {
+        if (line == null || line.trim().length() == 0) {
+            return;
+        }
+
+        String[] pair = line.trim().split("\\s+|\\s*[=]\\s*|\\s*[:]\\s*");
+        if (pair.length != 2) {
+            throw new InvalidConfigurationException("Line contains more than a 'name' and 'value': '" + line + "'");
+        }
+
+        this.name = pair[0];
+        this.element = pair[1];
+        containsData = true;
     }
 
 }
