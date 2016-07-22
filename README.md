@@ -25,13 +25,20 @@ float floatValue = config.getElementAsFloat("floatConfigValue");
 double doubleValue = config.getElementAsDouble("doubleConfigValue");
 ```
 
+And get the values back as a java.io.File
+```
+File file = config.getElementAsFile("filePathConfigValue");
+File verifiedFile = config.getElementAsVerifiedFile("filePathConfigValue");
+File verifiedDirectory = config.getElementAsVerifiedDirectory("directoryPathConfigValue");
+```
+
 Iterate over keys, values, or entry sets
 ```
-for (String value : config.getElements()) {
-    System.out.println("Value: " + value);
-}
 for (String name : config.getNames()) {
     System.out.println("Name: " + name);
+}
+for (String value : config.getElements()) {
+    System.out.println("Value: " + value);
 }
 for (Map.Entry<String, String> entry : config.getEntries()) {
     System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());

@@ -1,5 +1,6 @@
 package com.zakrywilson.commons.configuration;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
@@ -48,7 +49,7 @@ public final class Config {
     }
 
     /**
-     * Gets a {@link Set<Map.java.util.Map.Entry<String, String>>} of the data elements.
+     * Gets a {@literal Set<Map.Entry<String, String>>} of the data elements.
      *
      * @return an entry set of the data elements
      */
@@ -176,6 +177,65 @@ public final class Config {
         } catch (NumberFormatException e) {
             throw new TypeMismatchException("Value is not a double: " + elements.get(name));
         }
+    }
+
+    /**
+     * Gets the element as a {@link File}.
+     *
+     * @param name the name of the element to be used to obtain its value
+     * @return the value of the data element as a {@link File}
+     * @throws NullPointerException if the pathname argument is null
+     */
+    public File getElementAsFile(final String name) throws NullPointerException {
+         return new File(name);
+    }
+
+    /**
+     * Gets the element as a {@link File} and returns the instance if and only if the file passes the following
+     * criteria. If the file does not pass the criteria, <tt>null</tt> is returned.
+     * <p><ul>
+     * <li>The file exists
+     * <li>The file is a file (not a directory)
+     * </ul></p>
+     *
+     * @param name the name of the element to be used to obtain its value
+     * @return the value of the data element as a {@link File} if it exists and is a file (not a directory). Otherwise,
+     *         <tt>null</tt> is returned.
+     * @throws NullPointerException if the pathname argument is null
+     */
+    public File getElementAsVerifiedFile(final String name) throws NullPointerException {
+        File f = new File(name);
+        if (!f.exists()) {
+            return null;
+        }
+        if (!f.isFile()) {
+            return null;
+        }
+        return f;
+    }
+
+    /**
+     * Gets the element as a {@link File} and returns the instance if and only if the file passes the following
+     * criteria. If the file does not pass the criteria, <tt>null</tt> is returned.
+     * <p><ul>
+     * <li>The file exists
+     * <li>The file is a directory
+     * </ul></p>
+     *
+     * @param name the name of the element to be used to obtain its value
+     * @return the value of the data element as a {@link File} if it exists and is a directory. Otherwise,
+     *         <tt>null</tt> is returned.
+     * @throws NullPointerException if the pathname argument is null
+     */
+    public File getElementAsVerifiedDirectory(final String name) throws NullPointerException {
+        File d = new File(name);
+        if (!d.exists()) {
+            return null;
+        }
+        if (!d.isDirectory()) {
+            return null;
+        }
+        return d;
     }
 
     /**
