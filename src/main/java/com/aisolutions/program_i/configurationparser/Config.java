@@ -29,8 +29,52 @@ public final class Config {
         return elements.get(name);
     }
 
-    void setElement(final String name, final String element) {
-        elements.put(name, element);
+    public char getElementAsChar(final String name) throws TypeMismatchException {
+        final String value = elements.get(name);
+        if (value.length() != 1) {
+            throw new TypeMismatchException("Value is not a single character: " + value);
+        }
+        return value.charAt(0);
+    }
+
+    public short getElementAsShort(final String name) throws TypeMismatchException {
+        try {
+            return Short.parseShort(elements.get(name));
+        } catch (NumberFormatException e) {
+            throw new TypeMismatchException("Value is not a short: " + elements.get(name), e);
+        }
+    }
+
+    public byte getElementAsByte(final String name) throws TypeMismatchException {
+        try {
+            return Byte.parseByte(elements.get(name));
+        } catch (NumberFormatException e) {
+            throw new TypeMismatchException("Value is not a byte: " + elements.get(name), e);
+        }
+    }
+
+    public int getElementAsInteger(final String name) throws TypeMismatchException {
+        try {
+            return Integer.parseInt(elements.get(name));
+        } catch (NumberFormatException e) {
+            throw new TypeMismatchException("Value is not an integer: " + elements.get(name));
+        }
+    }
+
+    public float getElementAsFloat(final String name) throws TypeMismatchException {
+        try {
+            return Float.parseFloat(elements.get(name));
+        } catch (NumberFormatException e) {
+            throw new TypeMismatchException("Value is not a float: " + elements.get(name));
+        }
+    }
+
+    public double getElementAsDouble(final String name) throws TypeMismatchException {
+        try {
+            return Double.parseDouble(elements.get(name));
+        } catch (NumberFormatException e) {
+            throw new TypeMismatchException("Value is not a double: " + elements.get(name));
+        }
     }
 
     public int size() {
