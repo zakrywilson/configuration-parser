@@ -9,7 +9,7 @@ public final class Config {
 
     private Map<String, String> elements;
 
-    public Config(String configFilePath) throws IOException, InvalidConfigurationException {
+    public Config(final String configFilePath) throws IOException, InvalidConfigurationException {
         initialize(configFilePath);
     }
 
@@ -37,8 +37,8 @@ public final class Config {
         return elements.size();
     }
 
-    private void initialize(String configFilePath) throws IOException, InvalidConfigurationException {
-        ConfigFileParser parser = new ConfigFileParser(configFilePath);
+    private void initialize(final String configFilePath) throws IOException, InvalidConfigurationException {
+        final ConfigFileParser parser = new ConfigFileParser(configFilePath);
         elements = parser.parseConfigFile();
     }
 
