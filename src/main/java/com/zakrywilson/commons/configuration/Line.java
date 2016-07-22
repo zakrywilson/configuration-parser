@@ -25,8 +25,8 @@ final class Line {
     /**
      * Constructs a new line with a name and an element.
      *
-     * @param line the line to be set.
-     * @throws InvalidConfigurationException if the configuration file is of an invalid format.
+     * @param line the line to be set
+     * @throws InvalidConfigurationException if the configuration file is of an invalid format
      */
     public Line(final String line) throws InvalidConfigurationException {
         initialize(line);
@@ -35,7 +35,7 @@ final class Line {
     /**
      * Gets the name of the element of the line.
      *
-     * @return the name of the element.
+     * @return the name of the element
      */
     public String getName() {
         return name;
@@ -44,7 +44,7 @@ final class Line {
     /**
      * Gets the element data of the line.
      *
-     * @return the element data of the element.
+     * @return the element data of the element
      */
     public String getElement() {
         return element;
@@ -54,7 +54,7 @@ final class Line {
      * Returns true if the line contains real data. Real data constitues as a name-value pair
      * (e.g., not an empty line or comment).
      *
-     * @return <tt>true</tt> if the line contains data.
+     * @return <tt>true</tt> if the line contains data
      */
     public boolean containsData() {
         return containsData;
@@ -63,26 +63,26 @@ final class Line {
     /**
      * Initializes the line by parsing out the <i>name</i> and <i>value</i>.
      *
-     * @param line the line to be parsed.
-     * @throws InvalidConfigurationException if the configuration file is of an invalid format.
+     * @param line the line to be parsed
+     * @throws InvalidConfigurationException if the configuration file is of an invalid format
      */
     private void initialize(final String line) throws InvalidConfigurationException {
         if (line == null || line.trim().length() == 0) {
             return;
         }
 
-        // Check if line is a comment: i.e., a line beginning with a '#' character.
+        // Check if line is a comment: i.e., a line beginning with a '#' character
         if (line.matches("^\\s*[#].*")) {
             return;
         }
 
-        // Split the line by ':' and '=' with optional white space on either side.
+        // Split the line by ':' and '=' with optional white space on either side
         final String[] pair = line.trim().split("\\s+|\\s*[=]\\s*|\\s*[:]\\s*");
         if (pair.length != 2) {
             throw new InvalidConfigurationException("Line contains more than a 'name' and 'value': '" + line + "'");
         }
 
-        // Line is valid and contains data: store it.
+        // Line is valid and contains data: store it
         this.name = pair[0];
         this.element = pair[1];
         containsData = true;
