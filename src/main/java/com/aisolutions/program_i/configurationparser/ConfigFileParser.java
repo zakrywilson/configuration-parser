@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ConfigFileParser {
+final class ConfigFileParser {
 
     private File file;
 
@@ -32,8 +32,8 @@ public class ConfigFileParser {
     }
 
     public Map<String, String> parseConfigFile() throws IOException, InvalidConfigurationException {
-        Map<String, String> elements = new HashMap<>();
-        try (BufferedReader reader = Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8)) {
+        final Map<String, String> elements = new HashMap<>();
+        try (final BufferedReader reader = Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8)) {
             String nextLine = reader.readLine();
             while (nextLine != null) {
                 final Line line = new Line(nextLine);
