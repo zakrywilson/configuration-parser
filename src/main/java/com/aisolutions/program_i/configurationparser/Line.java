@@ -1,29 +1,71 @@
 package com.aisolutions.program_i.configurationparser;
 
+/**
+ * Represents a single line in the configuration file.
+ *
+ * @author Zach Wilson
+ */
 final class Line {
 
+    /**
+     * Flags whether or not this line contains relevant data (i.e., not an empty line or a comment).
+     */
     private boolean containsData;
 
+    /**
+     * Contains the name of the data point in the configuration or the value in the map.
+     */
     private String name;
 
+    /**
+     * Contains the data element of the data point in the configuration or the key in the map.
+     */
     private String element;
 
+    /**
+     * Constructs a new line with a name and an element.
+     *
+     * @param line the line to be set.
+     * @throws InvalidConfigurationException if the configuration file is of an invalid format.
+     */
     public Line(final String line) throws InvalidConfigurationException {
         initialize(line);
     }
 
+    /**
+     * Gets the name of the element of the line.
+     *
+     * @return the name of the element.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the element data of the line.
+     *
+     * @return the element data of the element.
+     */
     public String getElement() {
         return element;
     }
 
+    /**
+     * Returns true if the line contains real data. Real data constitues as a name-value pair
+     * (e.g., not an empty line or comment).
+     *
+     * @return <tt>true</tt> if the line contains data.
+     */
     public boolean containsData() {
         return containsData;
     }
 
+    /**
+     * Initializes the line by parsing out the <i>name</i> and <i>value</i>.
+     *
+     * @param line the line to be parsed.
+     * @throws InvalidConfigurationException if the configuration file is of an invalid format.
+     */
     private void initialize(final String line) throws InvalidConfigurationException {
         if (line == null || line.trim().length() == 0) {
             return;
