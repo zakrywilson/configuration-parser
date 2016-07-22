@@ -21,9 +21,9 @@ public final class Config {
      * Creates a new configuration containing a collection of data elements stored as <i>key</i>,
      * <i>value</i> entries.
      *
-     * @param configFilePath the path to the configuration file to be set.
-     * @throws IOException if an I/O error should occur.
-     * @throws InvalidConfigurationException if the configuration file does not exist or is not a file.
+     * @param configFilePath the path to the configuration file to be set
+     * @throws IOException if an I/O error should occur
+     * @throws InvalidConfigurationException if the configuration file does not exist or is not a file
      */
     public Config(final String configFilePath) throws IOException, InvalidConfigurationException {
         initialize(configFilePath);
@@ -32,7 +32,7 @@ public final class Config {
     /**
      * Gets a {@link Set} of the names of the data elements.
      *
-     * @return a set of the data element names.
+     * @return a set of the data element names
      */
     public Set<String> getNames() {
         return elements.keySet();
@@ -41,7 +41,7 @@ public final class Config {
     /**
      * Gets a {@link Collection<String>} of the data element values.
      *
-     * @return a collection of the data element names.
+     * @return a collection of the data element names
      */
     public Collection<String> getElements() {
         return elements.values();
@@ -50,7 +50,7 @@ public final class Config {
     /**
      * Gets a {@link Set<Map.java.util.Map.Entry<String, String>>} of the data elements.
      *
-     * @return an entry set of the data elements.
+     * @return an entry set of the data elements
      */
     public Set<Map.Entry<String, String>> getEntries() {
         return elements.entrySet();
@@ -59,8 +59,8 @@ public final class Config {
     /**
      * Gets the {@link String} representation of the data element value.
      *
-     * @param name the name of the element to be used to obtain its value.
-     * @return the element's value.
+     * @param name the name of the element to be used to obtain its value
+     * @return the element's value
      */
     public String getElement(final String name) {
         return elements.get(name);
@@ -69,10 +69,10 @@ public final class Config {
     /**
      * Gets the data element's value as a {@link char}.
      *
-     * @param name the name of the element to be used to obtain its value.
-     * @return the value of the data element as a {@link char}.
+     * @param name the name of the element to be used to obtain its value
+     * @return the value of the data element as a {@link char}
      * @throws TypeMismatchException if the type of the data element value does not match with this
-     *                               method's return value.
+     *                               method's return value
      */
     public char getElementAsChar(final String name) throws TypeMismatchException {
         final String value = elements.get(name);
@@ -86,9 +86,9 @@ public final class Config {
      * Gets the element as a {@link short}.
      *
      * @param name the name of the element to be used to obtain its value.
-     * @return the value of the data element as a {@link short}.
+     * @return the value of the data element as a {@link short}
      * @throws TypeMismatchException if the type of the data element value does not match with this
-     *                               method's return value.
+     *                               method's return value
      */
     public short getElementAsShort(final String name) throws TypeMismatchException {
         try {
@@ -102,9 +102,9 @@ public final class Config {
      * Gets the element as a {@link byte}.
      *
      * @param name the name of the element to be used to obtain its value.
-     * @return the value of the data element as a {@link byte}.
+     * @return the value of the data element as a {@link byte}
      * @throws TypeMismatchException if the type of the data element value does not match with this
-     *                               method's return value.
+     *                               method's return value
      */
     public byte getElementAsByte(final String name) throws TypeMismatchException {
         try {
@@ -117,10 +117,10 @@ public final class Config {
     /**
      * Gets the element as a {@link long}.
      *
-     * @param name the name of the element to be used to obtain its value.
-     * @return the value of the data element as a {@link long}.
+     * @param name the name of the element to be used to obtain its value
+     * @return the value of the data element as a {@link long}
      * @throws TypeMismatchException if the type of the data element value does not match with this
-     *                               method's return value.
+     *                               method's return value
      */
     public long getElementAsLong(final String name) throws TypeMismatchException {
         try {
@@ -133,10 +133,10 @@ public final class Config {
     /**
      * Gets the element as an {@link int}.
      *
-     * @param name the name of the element to be used to obtain its value.
-     * @return the value of the data element as a {@link int}.
+     * @param name the name of the element to be used to obtain its value
+     * @return the value of the data element as a {@link int}
      * @throws TypeMismatchException if the type of the data element value does not match with this
-     *                               method's return value.
+     *                               method's return value
      */
     public int getElementAsInt(final String name) throws TypeMismatchException {
         try {
@@ -149,10 +149,10 @@ public final class Config {
     /**
      * Gets the element as a {@link float}.
      *
-     * @param name the name of the element to be used to obtain its value.
-     * @return the value of the data element as a {@link float}.
+     * @param name the name of the element to be used to obtain its value
+     * @return the value of the data element as a {@link float}
      * @throws TypeMismatchException if the type of the data element value does not match with this
-     *                               method's return value.
+     *                               method's return value
      */
     public float getElementAsFloat(final String name) throws TypeMismatchException {
         try {
@@ -165,10 +165,10 @@ public final class Config {
     /**
      * Gets the element as a {@link double}.
      *
-     * @param name the name of the element to be used to obtain its value.
-     * @return the value of the data element as a {@link double}.
+     * @param name the name of the element to be used to obtain its value
+     * @return the value of the data element as a {@link double}
      * @throws TypeMismatchException if the type of the data element value does not match with this
-     *                               method's return value.
+     *                               method's return value
      */
     public double getElementAsDouble(final String name) throws TypeMismatchException {
         try {
@@ -181,7 +181,7 @@ public final class Config {
     /**
      * Gets the number of data elements in the configuration.
      *
-     * @return the number of data elements in the configuration.
+     * @return the number of data elements in the configuration
      */
     public int size() {
         return elements.size();
@@ -190,9 +190,9 @@ public final class Config {
     /**
      * Initializes the configuration by parsing the configuration file and storing the data elements.
      *
-     * @param configFilePath the path to the configuration file to be parsed.
-     * @throws IOException if an I/O error should occur.
-     * @throws InvalidConfigurationException if the configuration file does not exist or is not a file.
+     * @param configFilePath the path to the configuration file to be parsed
+     * @throws IOException if an I/O error should occur
+     * @throws InvalidConfigurationException if the configuration file does not exist or is not a file
      */
     private void initialize(final String configFilePath) throws IOException, InvalidConfigurationException {
         final ConfigFileParser parser = new ConfigFileParser(configFilePath);
