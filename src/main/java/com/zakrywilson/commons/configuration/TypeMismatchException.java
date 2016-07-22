@@ -1,4 +1,4 @@
-package com.aisolutions.program_i.configurationparser;
+package com.zakrywilson.commons.configuration;
 
 /**
  * Represents an inability to parse a <tt>String</tt> due to a type mismatch.

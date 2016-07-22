@@ -1,4 +1,4 @@
-package com.aisolutions.program_i.configurationparser;
+package com.zakrywilson.commons.configuration;
 
 import java.io.IOException;
 import java.util.Collection;

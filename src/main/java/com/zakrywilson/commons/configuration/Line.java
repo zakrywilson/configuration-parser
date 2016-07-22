@@ -1,4 +1,4 @@
-package com.aisolutions.program_i.configurationparser;
+package com.zakrywilson.commons.configuration;
 
 /**
  * Represents a single line in the configuration file.

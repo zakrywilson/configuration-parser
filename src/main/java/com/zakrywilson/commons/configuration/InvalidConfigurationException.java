@@ -1,4 +1,4 @@
-package com.aisolutions.program_i.configurationparser;
+package com.zakrywilson.commons.configuration;
 
 /**
  * Exception to represent an invalid format in the configuration file.
