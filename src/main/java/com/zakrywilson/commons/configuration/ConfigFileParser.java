@@ -24,9 +24,9 @@ final class ConfigFileParser {
     /**
      * Creates a new configuration file parser.
      *
-     * @param configFilePath the path to the configuration file to be parsed.
-     * @throws IllegalArgumentException if the configuration file is <tt>null</tt>.
-     * @throws FileNotFoundException if the configuration file does not exist or is not a file.
+     * @param configFilePath the path to the configuration file to be parsed
+     * @throws IllegalArgumentException if the configuration file is <tt>null</tt>
+     * @throws FileNotFoundException if the configuration file does not exist or is not a file
      */
     public ConfigFileParser(final String configFilePath) throws IllegalArgumentException, FileNotFoundException {
         initialize(configFilePath);
@@ -35,9 +35,9 @@ final class ConfigFileParser {
     /**
      * Parses the configuration file and returns the {@link Map} containing all of the data points.
      *
-     * @return the collection of data.
-     * @throws IOException if an I/O exception occurs.
-     * @throws InvalidConfigurationException if the configuration file does not exist or is not a file.
+     * @return the collection of data
+     * @throws IOException if an I/O exception occurs
+     * @throws InvalidConfigurationException if the configuration file does not exist or is not a file
      */
     public Map<String, String> parseConfigFile() throws IOException, InvalidConfigurationException {
         final Map<String, String> elements = new HashMap<>();
@@ -57,9 +57,9 @@ final class ConfigFileParser {
     /**
      * Initializes the parser by verifying that the configuration file exists and is a file.
      *
-     * @param path the path to the configuration file to be set.
-     * @throws IllegalArgumentException if the configuration file is <tt>null</tt>.
-     * @throws FileNotFoundException if the configuration file does not exist or is not a file.
+     * @param path the path to the configuration file to be set
+     * @throws IllegalArgumentException if the configuration file is <tt>null</tt>
+     * @throws FileNotFoundException if the configuration file does not exist or is not a file
      */
     private void initialize(final String path) throws IllegalArgumentException, FileNotFoundException {
         if (path == null || path.trim().length() == 0) {
