@@ -34,9 +34,13 @@ public class ConfigFileParser {
     public Map<String, String> parseConfigFile() throws IOException, InvalidConfigurationException {
         Map<String, String> elements = new HashMap<>();
         try (BufferedReader reader = Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8)) {
-            Line line = new Line(reader.readLine());
-            if (line.containsData()) {
-                elements.put(line.getName(), line.getElement());
+            String nextLine = reader.readLine();
+            while (nextLine != null) {
+                final Line line = new Line(nextLine);
+                if (line.containsData()) {
+                    elements.put(line.getName(), line.getElement());
+                }
+                nextLine = reader.readLine();
             }
         }
         return elements;
