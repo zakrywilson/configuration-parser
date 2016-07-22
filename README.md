@@ -86,3 +86,56 @@ Three basic configuration file styles are accepted by this library:
   
   config_element_2       200
   ```
+
+
+## Example
+
+### Config file set up
+
+File name: `/Users/Zach/Documents/configFile.properties`
+
+`configFile.properties` contents: 
+
+```
+myInteger          11
+myChar             Z
+myFile             /Users/Zach/Documents/file.txt
+myDirectory        /Users/Zach/Documents/my_dir
+```
+
+### Parsing file
+
+```java
+// Parse configuration file
+Config config = new Config("/Users/Zach/Documents/configFile.properties");
+```
+
+### Accessing elements
+
+```java
+// Access elements by name
+int  someInt  = config.getElementAsInteger("myInteger");
+char someChar = config.getElementAsChar("myChar");
+File myFile   = config.getElementAsVerifiedFile("myFile");
+File myDir    = config.getElementAsVerifiedDirectory("myDirectory");
+
+// Iterating over each element value
+for (String element : config.getElements() {
+    System.out.println("Element: " + element);
+}
+// This will print:
+// Element: 11
+// Element: Z
+// Element: /Users/Zach/Documents/file.txt
+// Element: /Users/Zach/Documents/my_dir
+
+// Iterating over each element name
+for (String name : config.getNames() {
+    System.out.println("Name: " + name);
+}
+// This will print:
+// Name: myInteger
+// Name: myChar
+// Name: myFile
+// Name: myDirectory
+```
