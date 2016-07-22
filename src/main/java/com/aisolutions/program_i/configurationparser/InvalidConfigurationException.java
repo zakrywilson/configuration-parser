@@ -32,12 +32,12 @@ public class InvalidConfigurationException extends Exception {
      * detail message of cause). This constructor is useful for exceptions that are little more
      * than wrappers for other throwables (for example, {@linkPrivilegedActionException)}.
      *
-     * @param t the cause (which is saved for later retrieval by the {@linkThrowable#getCause()}
-     *          method). (A <tt>null</tt>value is permitted, and indicates that the cause is
-     *          nonexistent or unknown.)
+     * @param cause the cause (which is saved for later retrieval by the {@linkThrowable#getCause()}
+     *              method). (A <tt>null</tt>value is permitted, and indicates that the cause is
+     *              nonexistent or unknown.)
      */
-    public InvalidConfigurationException(final Throwable t) {
-        super(t);
+    public InvalidConfigurationException(final Throwable cause) {
+        super(cause);
     }
 
     /**
@@ -48,12 +48,12 @@ public class InvalidConfigurationException extends Exception {
      *
      * @param msg the detail message (which is saved for later retrieval by the
      *            {@linkThrowable#getMessage()} method).
-     * @param t the cause (which is saved for later retrieval by the {@linkThrowable#getCause()}
-     *          method). (A <tt>null</tt> value is permitted, and indicates that the cause is
-     *          nonexistent or unknown.)
+     * @param cause the cause (which is saved for later retrieval by the {@linkThrowable#getCause()}
+     *              method). (A <tt>null</tt> value is permitted, and indicates that the cause is
+     *              nonexistent or unknown.)
      */
-    public InvalidConfigurationException(final String msg, final Throwable t) {
-        super(msg, t);
+    public InvalidConfigurationException(final String msg, final Throwable cause) {
+        super(msg, cause);
     }
 
 }
