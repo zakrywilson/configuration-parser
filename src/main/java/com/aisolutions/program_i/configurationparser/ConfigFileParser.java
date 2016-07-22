@@ -9,11 +9,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
 
-public class Parser {
+public class ConfigFileParser {
 
     private File file;
 
-    public Parser(final String configFilePath) throws IllegalArgumentException, FileNotFoundException {
+    public ConfigFileParser(final String configFilePath) throws IllegalArgumentException, FileNotFoundException {
         initialize(configFilePath);
     }
 
