@@ -29,11 +29,18 @@ public class Line {
             return;
         }
 
+        // Check if line is a comment: i.e., a line beginning with a '#' character.
+        if (line.matches("^\\s*[#].*")) {
+            return;
+        }
+
+        // Split the line by ':' and '=' with optional white space on either side.
         String[] pair = line.trim().split("\\s+|\\s*[=]\\s*|\\s*[:]\\s*");
         if (pair.length != 2) {
             throw new InvalidConfigurationException("Line contains more than a 'name' and 'value': '" + line + "'");
         }
 
+        // Line is valid and contains data: store it.
         this.name = pair[0];
         this.element = pair[1];
         containsData = true;
