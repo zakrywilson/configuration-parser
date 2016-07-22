@@ -83,6 +83,7 @@ public final class Config {
     }
 
     /**
+     * Gets the element as a {@link short}.
      *
      * @param name the name of the element to be used to obtain its value.
      * @return the value of the data element as a {@link short}.
@@ -98,6 +99,7 @@ public final class Config {
     }
 
     /**
+     * Gets the element as a {@link byte}.
      *
      * @param name the name of the element to be used to obtain its value.
      * @return the value of the data element as a {@link byte}.
@@ -113,6 +115,7 @@ public final class Config {
     }
 
     /**
+     * Gets the element as a {@link long}.
      *
      * @param name the name of the element to be used to obtain its value.
      * @return the value of the data element as a {@link long}.
@@ -128,6 +131,7 @@ public final class Config {
     }
 
     /**
+     * Gets the element as an {@link int}.
      *
      * @param name the name of the element to be used to obtain its value.
      * @return the value of the data element as a {@link int}.
@@ -143,6 +147,7 @@ public final class Config {
     }
 
     /**
+     * Gets the element as a {@link float}.
      *
      * @param name the name of the element to be used to obtain its value.
      * @return the value of the data element as a {@link float}.
@@ -158,6 +163,7 @@ public final class Config {
     }
 
     /**
+     * Gets the element as a {@link double}.
      *
      * @param name the name of the element to be used to obtain its value.
      * @return the value of the data element as a {@link double}.
