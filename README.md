@@ -4,35 +4,48 @@ A simple configuration file parser and container.
 
 ## How to use
 
+### Parsing a configuration file
+
 Simply provide a config file name and the file will be parsed on creation of the object
+
 ```java
 Config config = new Config("path/to/config/file");
 ```
 
-Access data element values
+The config file is now parsed and the elements are ready to be accessed
+
+### Accessing elements
+
+Obtain the String values by providing the element's name (e.g., the key)
+
 ```java
 String configValue = config.getElement("configValueName");
 ```
 
 Even parse the values into any primitive value
+
 ```java
-char charValue = config.getElementAsChar("charConfigValue");
-short shortValue = config.getElementAsShort("shortConfigValue");
-byte byteValue = config.getElementAsByte("byteConfigValue");
-long longValue = config.getElementAsLong("longConfigValue");
-int intValue = config.getElementAsInt("intConfigValue");
-float floatValue = config.getElementAsFloat("floatConfigValue");
-double doubleValue = config.getElementAsDouble("doubleConfigValue");
+byte   byteValue   = config.getElementAsByte("byteValue");
+char   charValue   = config.getElementAsChar("charValue");
+short  shortValue  = config.getElementAsShort("shortValue");
+int    intValue    = config.getElementAsInt("intValue");
+long   longValue   = config.getElementAsLong("longValue");
+float  floatValue  = config.getElementAsFloat("floatValue");
+double doubleValue = config.getElementAsDouble("doubleValue");
 ```
 
-And get the values back as a java.io.File
+And get the values back as a `java.io.File`
+
 ```java
-File file = config.getElementAsFile("filePathConfigValue");
-File verifiedFile = config.getElementAsVerifiedFile("filePathConfigValue");
-File verifiedDirectory = config.getElementAsVerifiedDirectory("directoryPathConfigValue");
+File unverifiedFile    = config.getElementAsFile("filePathName");
+File verifiedFile      = config.getElementAsVerifiedFile("filePathName");
+File verifiedDirectory = config.getElementAsVerifiedDirectory("directoryPathName");
 ```
+
+### Iterating over elements
 
 Iterate over keys, values, or entry sets
+
 ```java
 for (String name : config.getNames()) {
     System.out.println("Name: " + name);
@@ -48,6 +61,7 @@ for (Map.Entry<String, String> entry : config.getEntries()) {
 ## Requirements
 
 * Java 8
+* Maven
 
 
 ## Valid configuration file set up
