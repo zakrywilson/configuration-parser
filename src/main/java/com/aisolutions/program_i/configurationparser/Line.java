@@ -1,6 +1,6 @@
 package com.aisolutions.program_i.configurationparser;
 
-public class Line {
+final class Line {
 
     private boolean containsData;
 
@@ -35,7 +35,7 @@ public class Line {
         }
 
         // Split the line by ':' and '=' with optional white space on either side.
-        String[] pair = line.trim().split("\\s+|\\s*[=]\\s*|\\s*[:]\\s*");
+        final String[] pair = line.trim().split("\\s+|\\s*[=]\\s*|\\s*[:]\\s*");
         if (pair.length != 2) {
             throw new InvalidConfigurationException("Line contains more than a 'name' and 'value': '" + line + "'");
         }
