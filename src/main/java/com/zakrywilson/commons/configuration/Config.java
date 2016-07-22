@@ -115,11 +115,26 @@ public final class Config {
     /**
      *
      * @param name the name of the element to be used to obtain its value.
+     * @return the value of the data element as a {@link long}.
+     * @throws TypeMismatchException if the type of the data element value does not match with this
+     *                               method's return value.
+     */
+    public long getElementAsLong(final String name) throws TypeMismatchException {
+        try {
+            return Long.parseLong(elements.get(name));
+        } catch (NumberFormatException e) {
+            throw new TypeMismatchException("Value is not a long: " + elements.get(name));
+        }
+    }
+
+    /**
+     *
+     * @param name the name of the element to be used to obtain its value.
      * @return the value of the data element as a {@link int}.
      * @throws TypeMismatchException if the type of the data element value does not match with this
      *                               method's return value.
      */
-    public int getElementAsInteger(final String name) throws TypeMismatchException {
+    public int getElementAsInt(final String name) throws TypeMismatchException {
         try {
             return Integer.parseInt(elements.get(name));
         } catch (NumberFormatException e) {
