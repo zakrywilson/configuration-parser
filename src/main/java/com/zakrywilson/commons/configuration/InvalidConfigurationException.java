@@ -20,7 +20,7 @@ public final class InvalidConfigurationException extends Exception {
      * and may subsequently be initialized by a call to Throwable.initCause(java.lang.Throwable).
      *
      * @param msg the detail message. The detail message is saved for later retrieval by the
-     *            {@linkThrowable#getMessage()} method.
+     *            {@linkThrowable#getMessage()} method
      */
     public InvalidConfigurationException(final String msg) {
         super(msg);
@@ -47,7 +47,7 @@ public final class InvalidConfigurationException extends Exception {
      * exception's detail message.
      *
      * @param msg the detail message (which is saved for later retrieval by the
-     *            {@linkThrowable#getMessage()} method).
+     *            {@linkThrowable#getMessage()} method)
      * @param cause the cause (which is saved for later retrieval by the {@linkThrowable#getCause()}
      *              method). (A <tt>null</tt> value is permitted, and indicates that the cause is
      *              nonexistent or unknown.)
