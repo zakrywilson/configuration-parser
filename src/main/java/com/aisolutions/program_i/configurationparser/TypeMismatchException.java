@@ -5,7 +5,7 @@ package com.aisolutions.program_i.configurationparser;
  *
  * @author Zach Wilson
  */
-public class TypeMismatchException extends Exception {
+public final class TypeMismatchException extends Exception {
 
     /**
      * Constructs a new runtime exception with null as its detail message. The cause is not

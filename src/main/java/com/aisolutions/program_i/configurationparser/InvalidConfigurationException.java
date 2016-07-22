@@ -5,7 +5,7 @@ package com.aisolutions.program_i.configurationparser;
  *
  * @author Zach Wilson
  */
-public class InvalidConfigurationException extends Exception {
+public final class InvalidConfigurationException extends Exception {
 
     /**
      * Constructs a new exception with null as its detail message. The cause is not initialized,
