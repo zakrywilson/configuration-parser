@@ -5,17 +5,17 @@ A simple configuration file parser and container.
 ## How to use
 
 Simply provide a config file name and the file will be parsed on creation of the object
-```
+```java
 Config config = new Config("path/to/config/file");
 ```
 
 Access data element values
-```
+```java
 String configValue = config.getElement("configValueName");
 ```
 
 Even parse the values into any primitive value
-```
+```java
 char charValue = config.getElementAsChar("charConfigValue");
 short shortValue = config.getElementAsShort("shortConfigValue");
 byte byteValue = config.getElementAsByte("byteConfigValue");
@@ -26,14 +26,14 @@ double doubleValue = config.getElementAsDouble("doubleConfigValue");
 ```
 
 And get the values back as a java.io.File
-```
+```java
 File file = config.getElementAsFile("filePathConfigValue");
 File verifiedFile = config.getElementAsVerifiedFile("filePathConfigValue");
 File verifiedDirectory = config.getElementAsVerifiedDirectory("directoryPathConfigValue");
 ```
 
 Iterate over keys, values, or entry sets
-```
+```java
 for (String name : config.getNames()) {
     System.out.println("Name: " + name);
 }
