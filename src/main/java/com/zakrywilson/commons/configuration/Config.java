@@ -68,6 +68,27 @@ public final class Config {
     }
 
     /**
+     * Gets the data element's value as a {@link boolean}. Acceptable values are "true", "false"
+     * (not case-sensitive), <tt>1</tt>, and <tt>0</tt>. Any value other than the four will result
+     * in a {@link TypeMismatchException}.
+     *
+     * @param name the name of the element to be used to obtain its value
+     * @return the value of the data element as a {@link boolean}
+     * @throws TypeMismatchException if the type of the data element value does not match with this
+     *                               method's return value
+     */
+    public boolean getElementAsBoolean(final String name) throws TypeMismatchException {
+        final String value = elements.get(name);
+        if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("1")) {
+            return true;
+        }
+        if (value.equalsIgnoreCase("false") || value.equalsIgnoreCase("0")) {
+            return false;
+        }
+        throw new TypeMismatchException("Value is not a boolean: " + elements.get(name));
+    }
+
+    /**
      * Gets the data element's value as a {@link char}.
      *
      * @param name the name of the element to be used to obtain its value
