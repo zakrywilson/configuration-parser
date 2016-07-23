@@ -89,7 +89,28 @@ public final class Config {
     }
 
     /**
+     * Gets the element as a {@link byte}.
+     * <p>
+     * Acceptable values are those that are able to be parsed into a {@link byte}.
+     *
+     * @param name the name of the element to be used to obtain its value.
+     * @return the value of the data element as a {@link byte}
+     * @throws TypeMismatchException if the type of the data element value does not match with this
+     *                               method's return value
+     */
+    public byte getElementAsByte(final String name) throws TypeMismatchException {
+        try {
+            return Byte.parseByte(elements.get(name));
+        } catch (NumberFormatException e) {
+            throw new TypeMismatchException("Value is not a byte: " + elements.get(name), e);
+        }
+    }
+
+    /**
      * Gets the data element's value as a {@link char}.
+     * <p>
+     * Acceptable values must be one character in length. Anything less or more will result in a
+     * {@link TypeMismatchException}.
      *
      * @param name the name of the element to be used to obtain its value
      * @return the value of the data element as a {@link char}
@@ -106,6 +127,8 @@ public final class Config {
 
     /**
      * Gets the element as a {@link short}.
+     * <p>
+     * Acceptable values are those that are able to be parsed into a {@link short}.
      *
      * @param name the name of the element to be used to obtain its value.
      * @return the value of the data element as a {@link short}
@@ -121,39 +144,9 @@ public final class Config {
     }
 
     /**
-     * Gets the element as a {@link byte}.
-     *
-     * @param name the name of the element to be used to obtain its value.
-     * @return the value of the data element as a {@link byte}
-     * @throws TypeMismatchException if the type of the data element value does not match with this
-     *                               method's return value
-     */
-    public byte getElementAsByte(final String name) throws TypeMismatchException {
-        try {
-            return Byte.parseByte(elements.get(name));
-        } catch (NumberFormatException e) {
-            throw new TypeMismatchException("Value is not a byte: " + elements.get(name), e);
-        }
-    }
-
-    /**
-     * Gets the element as a {@link long}.
-     *
-     * @param name the name of the element to be used to obtain its value
-     * @return the value of the data element as a {@link long}
-     * @throws TypeMismatchException if the type of the data element value does not match with this
-     *                               method's return value
-     */
-    public long getElementAsLong(final String name) throws TypeMismatchException {
-        try {
-            return Long.parseLong(elements.get(name));
-        } catch (NumberFormatException e) {
-            throw new TypeMismatchException("Value is not a long: " + elements.get(name));
-        }
-    }
-
-    /**
      * Gets the element as an {@link int}.
+     * <p>
+     * Acceptable values are those that are able to be parsed into an {@link int}.
      *
      * @param name the name of the element to be used to obtain its value
      * @return the value of the data element as a {@link int}
@@ -169,7 +162,27 @@ public final class Config {
     }
 
     /**
+     * Gets the element as a {@link long}.
+     * <p>
+     * Acceptable values are those that are able to be parsed into a {@link long}.
+     *
+     * @param name the name of the element to be used to obtain its value
+     * @return the value of the data element as a {@link long}
+     * @throws TypeMismatchException if the type of the data element value does not match with this
+     *                               method's return value
+     */
+    public long getElementAsLong(final String name) throws TypeMismatchException {
+        try {
+            return Long.parseLong(elements.get(name));
+        } catch (NumberFormatException e) {
+            throw new TypeMismatchException("Value is not a long: " + elements.get(name));
+        }
+    }
+
+    /**
      * Gets the element as a {@link float}.
+     * <p>
+     * Acceptable values are those that are able to be parsed into a {@link float}.
      *
      * @param name the name of the element to be used to obtain its value
      * @return the value of the data element as a {@link float}
@@ -186,6 +199,8 @@ public final class Config {
 
     /**
      * Gets the element as a {@link double}.
+     * <p>
+     * Acceptable values are those that are able to be parsed into a {@link double}.
      *
      * @param name the name of the element to be used to obtain its value
      * @return the value of the data element as a {@link double}
