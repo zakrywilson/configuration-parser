@@ -25,13 +25,14 @@ String configValue = config.getElement("configValueName");
 Even parse the values into any primitive value
 
 ```java
-byte   byteValue   = config.getElementAsByte("byteName");
-char   charValue   = config.getElementAsChar("charName");
-short  shortValue  = config.getElementAsShort("shortName");
-int    intValue    = config.getElementAsInt("intName");
-long   longValue   = config.getElementAsLong("longName");
-float  floatValue  = config.getElementAsFloat("floatName");
-double doubleValue = config.getElementAsDouble("doubleName");
+boolean boolValue   = config.getElementAsBoolean("boolName");
+byte    byteValue   = config.getElementAsByte("byteName");
+char    charValue   = config.getElementAsChar("charName");
+short   shortValue  = config.getElementAsShort("shortName");
+int     intValue    = config.getElementAsInt("intName");
+long    longValue   = config.getElementAsLong("longName");
+float   floatValue  = config.getElementAsFloat("floatName");
+double  doubleValue = config.getElementAsDouble("doubleName");
 ```
 
 And get the values back as a `java.io.File`
