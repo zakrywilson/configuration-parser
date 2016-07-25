@@ -2,10 +2,11 @@ package com.zakrywilson.commons.configuration;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,9 +18,9 @@ import java.util.Map;
 final class ConfigFileParser {
 
     /**
-     * The configuration file.
+     * The input stream for the configuration file.
      */
-    private File file;
+    private InputStream stream;
 
     /**
      * Creates a new configuration file parser.
@@ -31,6 +32,19 @@ final class ConfigFileParser {
     public ConfigFileParser(final String configFilePath) throws IllegalArgumentException, FileNotFoundException {
         initialize(configFilePath);
     }
+    
+    /**
+     * Creates a new configuration file parser.
+     *
+     * @param is a file input stream to the configuration file
+     * @throws IllegalArgumentException if the input stream is <tt>null</tt>
+     */
+    public ConfigFileParser(final InputStream is) throws IllegalArgumentException {
+        if (is == null) {
+            throw new IllegalArgumentException("Input stream cannot be null.");
+        }
+        this.stream = is;
+    }
 
     /**
      * Parses the configuration file and returns the {@link Map} containing all of the data points.
@@ -41,7 +55,7 @@ final class ConfigFileParser {
      */
     public Map<String, String> parseConfigFile() throws IOException, InvalidConfigurationException {
         final Map<String, String> elements = new HashMap<>();
-        try (final BufferedReader reader = Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8)) {
+        try (final BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"))) {
             String nextLine = reader.readLine();
             while (nextLine != null) {
                 final Line line = new Line(nextLine);
@@ -65,13 +79,14 @@ final class ConfigFileParser {
         if (path == null || path.trim().length() == 0) {
             throw new IllegalArgumentException("Invalid config file path: " + path);
         }
-        file = new File(path);
+        final File file = new File(path);
         if (!file.exists()) {
             throw new FileNotFoundException("File does not exist: " + path);
         }
         if (!file.isFile()) {
             throw new FileNotFoundException("File is not a file. Cannot process file: " + file.getAbsolutePath());
         }
+        this.stream = new FileInputStream(file);
     }
 
 }
