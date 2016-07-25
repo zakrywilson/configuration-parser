@@ -304,8 +304,9 @@ public final class Config {
      * @throws InvalidConfigurationException if the configuration file does not exist or is not a file
      */
     private void initialize(final String configFilePath) throws IOException, InvalidConfigurationException {
-        final ConfigFileParser parser = new ConfigFileParser(configFilePath);
-        elements = parser.parseConfigFile();
+       try (final ConfigFileParser parser = new ConfigFileParser(configFilePath)) {
+            elements = parser.parseConfigFile();
+        }
     }
     
     /**
@@ -316,8 +317,9 @@ public final class Config {
      * @throws InvalidConfigurationException if the configuration file does not exist or is not a file
      */
     private void initialize(final InputStream is) throws IOException, InvalidConfigurationException {
-        final ConfigFileParser parser = new ConfigFileParser(is);
-        elements = parser.parseConfigFile();
+        try (final ConfigFileParser parser = new ConfigFileParser(is)) {
+            elements = parser.parseConfigFile();
+        }
     }
 
 }
