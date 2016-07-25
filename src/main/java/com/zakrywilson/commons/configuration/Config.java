@@ -2,6 +2,7 @@ package com.zakrywilson.commons.configuration;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -28,6 +29,18 @@ public final class Config {
      */
     public Config(final String configFilePath) throws IOException, InvalidConfigurationException {
         initialize(configFilePath);
+    }
+    
+    /**
+     * Creates a new configuration containing a collection of data elements stored as <i>key</i>,
+     * <i>value</i> entries.
+     * 
+     * @param is an input stream to the configuration file
+     * @throws IOException if an I/O error should occur
+     * @throws InvalidConfigurationException if the configuration file does not exist or is not a file
+     */
+    public Config(final InputStream is) throws IOException, InvalidConfigurationException {
+        initialize(is);
     }
 
     /**
@@ -292,6 +305,18 @@ public final class Config {
      */
     private void initialize(final String configFilePath) throws IOException, InvalidConfigurationException {
         final ConfigFileParser parser = new ConfigFileParser(configFilePath);
+        elements = parser.parseConfigFile();
+    }
+    
+    /**
+     * Initializes the configuration by parsing the configuration file and storing the data elements.
+     *
+     * @param is an input stream to the configuration file
+     * @throws IOException if an I/O error should occur
+     * @throws InvalidConfigurationException if the configuration file does not exist or is not a file
+     */
+    private void initialize(final InputStream is) throws IOException, InvalidConfigurationException {
+        final ConfigFileParser parser = new ConfigFileParser(is);
         elements = parser.parseConfigFile();
     }
 
