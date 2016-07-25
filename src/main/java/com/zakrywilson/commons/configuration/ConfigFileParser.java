@@ -15,7 +15,7 @@ import java.util.Map;
  *
  * @author Zach Wilson
  */
-final class ConfigFileParser {
+final class ConfigFileParser implements AutoCloseable {
 
     /**
      * The input stream for the configuration file.
@@ -66,6 +66,18 @@ final class ConfigFileParser {
             }
         }
         return elements;
+    }
+    
+    /**
+     * Closes {@link InputStream}.
+     * 
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    public void close() throws IOException {
+        if (stream != null) {
+            stream.close();
+        }
     }
 
     /**
