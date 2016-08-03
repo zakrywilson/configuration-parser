@@ -59,12 +59,6 @@ for (Map.Entry<String, String> entry : config.getEntries()) {
 }
 ```
 
-## Requirements
-
-* Java 8
-* Maven
-
-
 ## Valid configuration file set up
 
 Three basic configuration file styles are accepted by this library:
@@ -140,3 +134,8 @@ for (String name : config.getNames() {
 // Name: myFile
 // Name: myDirectory
 ```
+
+## Requirements
+
+* Java 8
+* Maven
