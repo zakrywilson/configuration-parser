@@ -138,4 +138,4 @@ for (String name : config.getNames() {
 ## Requirements
 
 * Java 8
-* Maven
+* Maven 3
