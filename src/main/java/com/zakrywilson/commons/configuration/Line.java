@@ -28,7 +28,7 @@ final class Line {
      * @param line the line to be set
      * @throws InvalidConfigurationException if the configuration file is of an invalid format
      */
-    public Line(final String line) throws InvalidConfigurationException {
+    public Line(String line) throws InvalidConfigurationException {
         initialize(line);
     }
 
@@ -51,7 +51,7 @@ final class Line {
     }
 
     /**
-     * Returns true if the line contains real data. Real data constitues as a name-value pair
+     * Returns true if the line contains real data. Real data constitutes as a name-value pair
      * (e.g., not an empty line or comment).
      *
      * @return <tt>true</tt> if the line contains data
@@ -66,7 +66,7 @@ final class Line {
      * @param line the line to be parsed
      * @throws InvalidConfigurationException if the configuration file is of an invalid format
      */
-    private void initialize(final String line) throws InvalidConfigurationException {
+    private void initialize(String line) throws InvalidConfigurationException {
         if (line == null || line.trim().length() == 0) {
             return;
         }
@@ -77,7 +77,7 @@ final class Line {
         }
 
         // Split the line by ':' and '=' with optional white space on either side
-        final String[] pair = line.trim().split("\\s+|\\s*[=]\\s*|\\s*[:]\\s*");
+        String[] pair = line.trim().split("\\s+|\\s*[=]\\s*|\\s*[:]\\s*");
         if (pair.length != 2) {
             throw new InvalidConfigurationException("Line contains more than a 'name' and 'value': '" + line + "'");
         }

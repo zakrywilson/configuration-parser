@@ -29,7 +29,7 @@ final class ConfigFileParser implements AutoCloseable {
      * @throws IllegalArgumentException if the configuration file is <tt>null</tt>
      * @throws FileNotFoundException if the configuration file does not exist or is not a file
      */
-    public ConfigFileParser(final String configFilePath) throws IllegalArgumentException, FileNotFoundException {
+    public ConfigFileParser(String configFilePath) throws IllegalArgumentException, FileNotFoundException {
         initialize(configFilePath);
     }
     
@@ -39,7 +39,7 @@ final class ConfigFileParser implements AutoCloseable {
      * @param is a file input stream to the configuration file
      * @throws IllegalArgumentException if the input stream is <tt>null</tt>
      */
-    public ConfigFileParser(final InputStream is) throws IllegalArgumentException {
+    public ConfigFileParser(InputStream is) throws IllegalArgumentException {
         if (is == null) {
             throw new IllegalArgumentException("Input stream cannot be null.");
         }
@@ -51,14 +51,15 @@ final class ConfigFileParser implements AutoCloseable {
      *
      * @return the collection of data
      * @throws IOException if an I/O exception occurs
-     * @throws InvalidConfigurationException if the configuration file does not exist or is not a file
+     * @throws InvalidConfigurationException if the configuration file does not exist or is not a
+     *         file
      */
     public Map<String, String> parseConfigFile() throws IOException, InvalidConfigurationException {
-        final Map<String, String> elements = new HashMap<>();
-        try (final BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"))) {
+        Map<String, String> elements = new HashMap<>();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"))) {
             String nextLine = reader.readLine();
             while (nextLine != null) {
-                final Line line = new Line(nextLine);
+                Line line = new Line(nextLine);
                 if (line.containsData()) {
                     elements.put(line.getName(), line.getElement());
                 }
@@ -87,11 +88,11 @@ final class ConfigFileParser implements AutoCloseable {
      * @throws IllegalArgumentException if the configuration file is <tt>null</tt>
      * @throws FileNotFoundException if the configuration file does not exist or is not a file
      */
-    private void initialize(final String path) throws IllegalArgumentException, FileNotFoundException {
+    private void initialize(String path) throws IllegalArgumentException, FileNotFoundException {
         if (path == null || path.trim().length() == 0) {
             throw new IllegalArgumentException("Invalid config file path: " + path);
         }
-        final File file = new File(path);
+        File file = new File(path);
         if (!file.exists()) {
             throw new FileNotFoundException("File does not exist: " + path);
         }
