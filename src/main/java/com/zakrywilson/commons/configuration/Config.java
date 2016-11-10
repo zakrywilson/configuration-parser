@@ -1,9 +1,10 @@
 package com.zakrywilson.commons.configuration;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -46,21 +47,21 @@ public final class Config {
     }
 
     /**
-     * Gets a {@link Set} of the names of the data elements.
+     * Gets a {@link List<String>} of the names of the data elements.
      *
      * @return a set of the data element names
      */
-    public Set<String> getNames() {
-        return elements.keySet();
+    public List<String> getNames() {
+        return (List<String>) elements.keySet();
     }
 
     /**
-     * Gets a {@link Collection<String>} of the data element values.
+     * Gets a {@link List<String>} of the data element values.
      *
      * @return a collection of the data element names
      */
-    public Collection<String> getElements() {
-        return elements.values();
+    public List<String> getElements() {
+        return (List<String>) elements.values();
     }
 
     /**
@@ -76,10 +77,12 @@ public final class Config {
      * Gets the {@link String} representation of the data element value.
      *
      * @param name the name of the element to be used to obtain its value
-     * @return the element's value
+     * @return the element's value or <tt>null</tt> if no element is found
+     * @throws IllegalArgumentException if the name is <tt>null</tt> or blank, or if no element
+     *         can be found by the name provided
      */
-    public String getElement(String name) {
-        return elements.get(name);
+    public String getString(String name) throws IllegalArgumentException {
+        return getByName(name);
     }
 
     /**
@@ -91,16 +94,18 @@ public final class Config {
      * @return the value of the data element as a <tt>boolean</tt>
      * @throws TypeMismatchException if the type of the data element value does not match with this
      *         method's return value
+     * @throws IllegalArgumentException if the name is <tt>null</tt> or blank, or if no element
+     *         can be found by the name provided
      */
-    public boolean getElementAsBoolean(String name) throws TypeMismatchException {
-        String value = elements.get(name);
-        if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("1")) {
+    public boolean getBoolean(String name) throws TypeMismatchException, IllegalArgumentException {
+        String element = getByName(name);
+        if (element.equalsIgnoreCase("true") || element.equalsIgnoreCase("1")) {
             return true;
         }
-        if (value.equalsIgnoreCase("false") || value.equalsIgnoreCase("0")) {
+        if (element.equalsIgnoreCase("false") || element.equalsIgnoreCase("0")) {
             return false;
         }
-        throw new TypeMismatchException("Value is not a boolean: " + elements.get(name));
+        throw new TypeMismatchException("Value is not a boolean: " + element);
     }
 
     /**
@@ -112,12 +117,15 @@ public final class Config {
      * @return the value of the data element as a <tt>byte</tt>
      * @throws TypeMismatchException if the type of the data element value does not match with this
      *         method's return value
+     * @throws IllegalArgumentException if the name is <tt>null</tt> or blank, or if no element
+     *         can be found by the name provided
      */
-    public byte getElementAsByte(String name) throws TypeMismatchException {
+    public byte getByte(String name) throws TypeMismatchException, IllegalArgumentException {
+        String element = getByName(name);
         try {
-            return Byte.parseByte(elements.get(name));
+            return Byte.parseByte(element);
         } catch (NumberFormatException e) {
-            throw new TypeMismatchException("Value is not a byte: " + elements.get(name), e);
+            throw new TypeMismatchException("Value is not a byte: " + element, e);
         }
     }
 
@@ -131,13 +139,15 @@ public final class Config {
      * @return the value of the data element as a <tt>char</tt>
      * @throws TypeMismatchException if the type of the data element value does not match with this
      *         method's return value
+     * @throws IllegalArgumentException if the name is <tt>null</tt> or blank, or if no element
+     *         can be found by the name provided
      */
-    public char getElementAsChar(String name) throws TypeMismatchException {
-        String value = elements.get(name);
-        if (value.length() != 1) {
-            throw new TypeMismatchException("Value is not a single character: " + value);
+    public char getChar(String name) throws TypeMismatchException, IllegalArgumentException {
+        String element = getByName(name);
+        if (element.length() != 1) {
+            throw new TypeMismatchException("Value is not a single character: " + element);
         }
-        return value.charAt(0);
+        return element.charAt(0);
     }
 
     /**
@@ -149,12 +159,15 @@ public final class Config {
      * @return the value of the data element as a <tt>short</tt>
      * @throws TypeMismatchException if the type of the data element value does not match with this
      *         method's return value
+     * @throws IllegalArgumentException if the name is <tt>null</tt> or blank, or if no element
+     *         can be found by the name provided
      */
-    public short getElementAsShort(String name) throws TypeMismatchException {
+    public short getShort(String name) throws TypeMismatchException, IllegalArgumentException {
+        String element = getByName(name);
         try {
-            return Short.parseShort(elements.get(name));
+            return Short.parseShort(element);
         } catch (NumberFormatException e) {
-            throw new TypeMismatchException("Value is not a short: " + elements.get(name), e);
+            throw new TypeMismatchException("Value is not a short: " + element, e);
         }
     }
 
@@ -167,12 +180,15 @@ public final class Config {
      * @return the value of the data element as a <tt>int</tt>
      * @throws TypeMismatchException if the type of the data element value does not match with this
      *         method's return value
+     * @throws IllegalArgumentException if the name is <tt>null</tt> or blank, or if no element
+     *         can be found by the name provided
      */
-    public int getElementAsInt(String name) throws TypeMismatchException {
+    public int getInt(String name) throws TypeMismatchException, IllegalArgumentException {
+        String element = getByName(name);
         try {
-            return Integer.parseInt(elements.get(name));
+            return Integer.parseInt(element);
         } catch (NumberFormatException e) {
-            throw new TypeMismatchException("Value is not an integer: " + elements.get(name));
+            throw new TypeMismatchException("Value is not an integer: " + element, e);
         }
     }
 
@@ -185,12 +201,15 @@ public final class Config {
      * @return the value of the data element as a <tt>long</tt>
      * @throws TypeMismatchException if the type of the data element value does not match with this
      *         method's return value
+     * @throws IllegalArgumentException if the name is <tt>null</tt> or blank, or if no element
+     *         can be found by the name provided
      */
-    public long getElementAsLong(String name) throws TypeMismatchException {
+    public long getLong(String name) throws TypeMismatchException, IllegalArgumentException {
+        String element = getByName(name);
         try {
-            return Long.parseLong(elements.get(name));
+            return Long.parseLong(element);
         } catch (NumberFormatException e) {
-            throw new TypeMismatchException("Value is not a long: " + elements.get(name));
+            throw new TypeMismatchException("Value is not a long: " + element, e);
         }
     }
 
@@ -203,12 +222,15 @@ public final class Config {
      * @return the value of the data element as a <tt>float</tt>
      * @throws TypeMismatchException if the type of the data element value does not match with this
      *         method's return value
+     * @throws IllegalArgumentException if the name is <tt>null</tt> or blank, or if no element
+     *         can be found by the name provided
      */
-    public float getElementAsFloat(String name) throws TypeMismatchException {
+    public float getFloat(String name) throws TypeMismatchException, IllegalArgumentException {
+        String element = getByName(name);
         try {
-            return Float.parseFloat(elements.get(name));
+            return Float.parseFloat(element);
         } catch (NumberFormatException e) {
-            throw new TypeMismatchException("Value is not a float: " + elements.get(name));
+            throw new TypeMismatchException("Value is not a float: " + element, e);
         }
     }
 
@@ -221,12 +243,15 @@ public final class Config {
      * @return the value of the data element as a <tt>double</tt>
      * @throws TypeMismatchException if the type of the data element value does not match with this
      *         method's return value
+     * @throws IllegalArgumentException if the name is <tt>null</tt> or blank, or if no element
+     *         can be found by the name provided
      */
-    public double getElementAsDouble(String name) throws TypeMismatchException {
+    public double getDouble(String name) throws TypeMismatchException, IllegalArgumentException {
+        String element = getByName(name);
         try {
-            return Double.parseDouble(elements.get(name));
+            return Double.parseDouble(element);
         } catch (NumberFormatException e) {
-            throw new TypeMismatchException("Value is not a double: " + elements.get(name));
+            throw new TypeMismatchException("Value is not a double: " + element, e);
         }
     }
 
@@ -235,10 +260,12 @@ public final class Config {
      *
      * @param name the name of the element to be used to obtain its value
      * @return the value of the data element as a {@link File}
-     * @throws NullPointerException if the pathname argument is <tt>null</tt>
+     * @throws IllegalArgumentException if the name is <tt>null</tt> or blank, or if no element
+     *         can be found by the name provided
      */
-    public File getElementAsFile(String name) throws NullPointerException {
-        return new File(name);
+    public File getFile(String name) throws IllegalArgumentException {
+        String element = getByName(name);
+        return new File(element);
     }
 
     /**
@@ -253,15 +280,19 @@ public final class Config {
      * @param name the name of the element to be used to obtain its value
      * @return the value of the data element as a {@link File} if it exists and is a file (not a
      *         directory). Otherwise, <tt>null</tt> is returned
-     * @throws NullPointerException if the pathname argument is <tt>null</tt>
+     * @throws FileNotFoundException if file does not exist or it is a directory
+     * @throws IllegalArgumentException if the name is <tt>null</tt> or blank, or if no element
+     *         can be found by the name provided
      */
-    public File getElementAsVerifiedFile(String name) throws NullPointerException {
-        File f = new File(name);
+    public File getVerifiedFile(String name) throws FileNotFoundException, IllegalArgumentException {
+        String element = getByName(name);
+        File f = new File(element);
         if (!f.exists()) {
-            return null;
+            throw new FileNotFoundException(String.format("File does not exist for name '%s': %s",
+                                                          name, element));
         }
-        if (!f.isFile()) {
-            return null;
+        if (f.isDirectory()) {
+            throw new FileNotFoundException("File is a directory: " + f);
         }
         return f;
     }
@@ -278,15 +309,19 @@ public final class Config {
      * @param name the name of the element to be used to obtain its value
      * @return the value of the data element as a {@link File} if it exists and is a directory
      *         Otherwise, <tt>null</tt> is returned
-     * @throws NullPointerException if the pathname argument is <tt>null</tt>
+     * @throws FileNotFoundException if file does not exist or it is not a directory
+     * @throws IllegalArgumentException if the name is <tt>null</tt> or blank, or if no element
+     *         can be found by the name provided
      */
-    public File getElementAsVerifiedDirectory(String name) throws NullPointerException {
+    public File getVerifiedDirectory(String name) throws FileNotFoundException, IllegalArgumentException {
+        String element = getByName(name);
         File d = new File(name);
         if (!d.exists()) {
-            return null;
+            throw new FileNotFoundException(String.format("File does not exist for name '%s': %s",
+                                                          name, element));
         }
         if (!d.isDirectory()) {
-            return null;
+            throw new FileNotFoundException("File is not a directory: " + d);
         }
         return d;
     }
@@ -309,8 +344,7 @@ public final class Config {
      * @throws InvalidConfigurationException if the configuration file does not exist or is not a
      *         file
      */
-    private void initialize(String configFilePath)
-            throws IOException, InvalidConfigurationException {
+    private void initialize(String configFilePath) throws IOException, InvalidConfigurationException {
         try (ConfigFileParser parser = new ConfigFileParser(configFilePath)) {
             elements = parser.parseConfigFile();
         }
@@ -329,6 +363,31 @@ public final class Config {
         try (ConfigFileParser parser = new ConfigFileParser(is)) {
             elements = parser.parseConfigFile();
         }
+    }
+
+    /**
+     * Gets an element by its provided name. This method also checks against invalid input
+     * parameters, i.e., the method throws an {@link IllegalArgumentException} if <tt>name</tt>
+     * is null or blank. If <tt>name</tt> fails to obtain a non-null value, an
+     * {@link IllegalArgumentException} is also thrown.
+     *
+     * @param name the name used to find an element
+     * @return the element
+     * @throws IllegalArgumentException if <tt>name</tt> is <tt>null</tt> or blank, or if no
+     *         element is found
+     */
+    private String getByName(String name) throws IllegalArgumentException {
+        if (name == null) {
+            throw new IllegalArgumentException("Name cannot be null");
+        }
+        if (name.trim().length() == 0) {
+            throw new IllegalArgumentException("Name cannot be blank");
+        }
+        String element = elements.get(name);
+        if (element == null) {
+            throw new IllegalArgumentException("No element exists for name: " + name);
+        }
+        return element;
     }
 
 }
