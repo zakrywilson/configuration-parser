@@ -19,28 +19,28 @@ The config file is now parsed and the elements are ready to be accessed
 Obtain the String values by providing the element's name (e.g., the key)
 
 ```java
-String configValue = config.getElement("configValueName");
+String configValue = config.getString("configValueName");
 ```
 
 Even parse the values into any primitive value
 
 ```java
-boolean boolValue   = config.getElementAsBoolean("boolName");
-byte    byteValue   = config.getElementAsByte("byteName");
-char    charValue   = config.getElementAsChar("charName");
-short   shortValue  = config.getElementAsShort("shortName");
-int     intValue    = config.getElementAsInt("intName");
-long    longValue   = config.getElementAsLong("longName");
-float   floatValue  = config.getElementAsFloat("floatName");
-double  doubleValue = config.getElementAsDouble("doubleName");
+boolean boolValue   = config.getBoolean("boolName");
+byte    byteValue   = config.getByte("byteName");
+char    charValue   = config.getChar("charName");
+short   shortValue  = config.getShort("shortName");
+int     intValue    = config.getInt("intName");
+long    longValue   = config.getLong("longName");
+float   floatValue  = config.getFloat("floatName");
+double  doubleValue = config.getDouble("doubleName");
 ```
 
 And get the values back as a `java.io.File`
 
 ```java
-File unverifiedFile    = config.getElementAsFile("filePathName");
-File verifiedFile      = config.getElementAsVerifiedFile("filePathName");
-File verifiedDirectory = config.getElementAsVerifiedDirectory("directoryPathName");
+File unverifiedFile    = config.getFile("filePathName");
+File verifiedFile      = config.getVerifiedFile("filePathName");
+File verifiedDirectory = config.getVerifiedDirectory("directoryPathName");
 ```
 
 ### Iterating over elements
@@ -109,10 +109,10 @@ Config config = new Config("/Users/Zach/Documents/configFile.properties");
 
 ```java
 // Access elements by name
-int  someInt  = config.getElementAsInteger("myInteger");
-char someChar = config.getElementAsChar("myChar");
-File myFile   = config.getElementAsVerifiedFile("myFile");
-File myDir    = config.getElementAsVerifiedDirectory("myDirectory");
+int  someInt  = config.getInteger("myInteger");
+char someChar = config.getChar("myChar");
+File myFile   = config.getVerifiedFile("myFile");
+File myDir    = config.getVerifiedDirectory("myDirectory");
 
 // Iterating over each element value
 for (String element : config.getElements() {
