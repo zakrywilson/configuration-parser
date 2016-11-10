@@ -39,8 +39,8 @@ And get the values back as a `java.io.File`
 
 ```java
 File unverifiedFile    = config.getFile("filePathName");
-File verifiedFile      = config.getVerifiedFile("filePathName");
-File verifiedDirectory = config.getVerifiedDirectory("directoryPathName");
+File verifiedFile      = config.getValidFile("filePathName");
+File verifiedDirectory = config.getValidDirectory("directoryPathName");
 ```
 
 ### Iterating over elements
@@ -111,8 +111,8 @@ Config config = new Config("/Users/Zach/Documents/configFile.properties");
 // Access elements by name
 int  someInt  = config.getInteger("myInteger");
 char someChar = config.getChar("myChar");
-File myFile   = config.getVerifiedFile("myFile");
-File myDir    = config.getVerifiedDirectory("myDirectory");
+File myFile   = config.getValidFile("myFile");
+File myDir    = config.getValidDirectory("myDirectory");
 
 // Iterating over each element value
 for (String element : config.getElements() {
