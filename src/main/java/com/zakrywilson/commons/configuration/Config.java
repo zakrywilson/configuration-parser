@@ -284,7 +284,7 @@ public final class Config {
      * @throws IllegalArgumentException if the name is <tt>null</tt> or blank, or if no element
      *         can be found by the name provided
      */
-    public File getVerifiedFile(String name) throws FileNotFoundException, IllegalArgumentException {
+    public File getValidFile(String name) throws FileNotFoundException, IllegalArgumentException {
         String element = getByName(name);
         File f = new File(element);
         if (!f.exists()) {
@@ -313,7 +313,7 @@ public final class Config {
      * @throws IllegalArgumentException if the name is <tt>null</tt> or blank, or if no element
      *         can be found by the name provided
      */
-    public File getVerifiedDirectory(String name) throws FileNotFoundException, IllegalArgumentException {
+    public File getValidDirectory(String name) throws FileNotFoundException, IllegalArgumentException {
         String element = getByName(name);
         File d = new File(name);
         if (!d.exists()) {
