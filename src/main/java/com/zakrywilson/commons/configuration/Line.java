@@ -76,15 +76,20 @@ final class Line {
             return;
         }
 
-        // Split the line by ':' and '=' with optional white space on either side
-        String[] pair = line.trim().split("\\s+|\\s*[=]\\s*|\\s*[:]\\s*");
-        if (pair.length != 2) {
-            throw new InvalidConfigurationException("Line contains more than a 'name' and 'value': '" + line + "'");
+        line = line.trim();
+        if (!line.matches("[A-za-z0-9_]+(\\s)*(=|:|\\s+)+(\\s)*[A-za-z0-9\\s_[.][/]\\\\]+(\\s*#+.*)?")) {
+            throw new InvalidConfigurationException("Line is malformed: '" + line + "'");
+        }
+
+        // Split the line by a colon, an equals sign, or white space
+        String[] pair = line.trim().split("(\\s)*((\\s)*(:|=|\\s+)(\\s)*)+(\\s)*", 2);
+        if (pair.length < 2) {
+            throw new InvalidConfigurationException("Line does not contain only a name and an element: '" + line + "'");
         }
 
         // Line is valid and contains data: store it
         this.name = pair[0];
-        this.element = pair[1];
+        this.element = pair[1].split("\\s*#", 2)[0]; // Remove any possible trailing comment(s)
         containsData = true;
     }
 
