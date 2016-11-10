@@ -29,10 +29,11 @@ final class ConfigFileParser implements AutoCloseable {
      * @throws IllegalArgumentException if the configuration file is <tt>null</tt>
      * @throws FileNotFoundException if the configuration file does not exist or is not a file
      */
-    public ConfigFileParser(String configFilePath) throws IllegalArgumentException, FileNotFoundException {
+    public ConfigFileParser(String configFilePath)
+            throws IllegalArgumentException, FileNotFoundException {
         initialize(configFilePath);
     }
-    
+
     /**
      * Creates a new configuration file parser.
      *
@@ -68,10 +69,10 @@ final class ConfigFileParser implements AutoCloseable {
         }
         return elements;
     }
-    
+
     /**
      * Closes {@link InputStream}.
-     * 
+     *
      * @throws IOException if an I/O error occurs
      */
     @Override

@@ -31,11 +31,11 @@ public final class Config {
     public Config(String configFilePath) throws IOException, InvalidConfigurationException {
         initialize(configFilePath);
     }
-    
+
     /**
      * Creates a new configuration containing a collection of data elements stored as <i>key</i>,
      * <i>value</i> entries.
-     * 
+     *
      * @param is an input stream to the configuration file
      * @throws IOException if an I/O error should occur
      * @throws InvalidConfigurationException if the configuration file does not exist or is not a
@@ -238,7 +238,7 @@ public final class Config {
      * @throws NullPointerException if the pathname argument is <tt>null</tt>
      */
     public File getElementAsFile(String name) throws NullPointerException {
-         return new File(name);
+        return new File(name);
     }
 
     /**
@@ -309,12 +309,13 @@ public final class Config {
      * @throws InvalidConfigurationException if the configuration file does not exist or is not a
      *         file
      */
-    private void initialize(String configFilePath) throws IOException, InvalidConfigurationException {
-       try (ConfigFileParser parser = new ConfigFileParser(configFilePath)) {
+    private void initialize(String configFilePath)
+            throws IOException, InvalidConfigurationException {
+        try (ConfigFileParser parser = new ConfigFileParser(configFilePath)) {
             elements = parser.parseConfigFile();
         }
     }
-    
+
     /**
      * Initializes the configuration by parsing the configuration file and storing the data
      * elements.
