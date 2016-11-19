@@ -5,7 +5,7 @@ package com.zakrywilson.commons.configuration;
  *
  * @author Zach Wilson
  */
-public final class TypeMismatchException extends Exception {
+public final class TypeMismatchException extends RuntimeException {
 
     /**
      * The serial version UID.
