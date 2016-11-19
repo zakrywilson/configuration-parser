@@ -109,7 +109,7 @@ Config config = new Config("/Users/Zach/Documents/configFile.properties");
 
 ```java
 // Access elements by name
-int  someInt  = config.getInteger("myInteger");
+int  someInt  = config.getInt("myInteger");
 char someChar = config.getChar("myChar");
 File myFile   = config.getValidFile("myFile");
 File myDir    = config.getValidDirectory("myDirectory");
